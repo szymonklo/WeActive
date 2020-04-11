@@ -19,5 +19,7 @@ namespace WeActive.API.Data
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
+        Task<Activity> GetActivity(int id);
+        Task<PagedList<Activity>> GetActivities(ActivityParams activityParams);
     }
 }

@@ -14,6 +14,7 @@ namespace WeActive.API.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Activity> Activities { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Like>()
@@ -39,6 +40,22 @@ namespace WeActive.API.Data
             builder.Entity<Message>()
                 .HasOne(u => u.Recipient)
                 .WithMany(m => m.MessagesReceived)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Entity<Participant>()
+                .HasKey(k => new { k.ActivityId, k.UserId });
+
+            builder.Entity<Participant>()
+                .HasOne(u => u.Activity)
+                .WithMany()
+                .HasForeignKey(u => u.ActivityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Participant>()
+                .HasOne(u => u.User)
+                .WithMany()
+                .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 

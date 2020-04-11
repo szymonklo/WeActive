@@ -167,6 +167,19 @@ namespace WeActive.API.Data
             return messages;
         }
 
-        
+        public async Task<Activity> GetActivity(int id)
+        {
+            var activity = await _context.Activities.FirstOrDefaultAsync(a => a.Id == id);
+
+            return activity;
+        }
+
+        public async Task<PagedList<Activity>> GetActivities(ActivityParams activityParams)
+        {
+            var activities = _context.Activities.AsQueryable();
+
+            return await PagedList<Activity>.CreateAsync(activities,
+                activityParams.PageNumber, activityParams.PageSize);;
+        }
     }
 }
