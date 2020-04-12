@@ -12,6 +12,10 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes-guard';
 import { ListResolver } from './_resolvers/list.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { ActivityListResolver } from './_resolvers/activity-list.resolver';
+import { ActivityListComponent } from './activities/activity-list/activity-list.component';
+import { ActivityEditComponent } from './activities/activity-edit/activity-edit.component';
+import { ActivityEditResolver } from './_resolvers/activity-edit.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -20,6 +24,10 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
+            { path: 'activities', component: ActivityListComponent,
+                resolve: {activities: ActivityListResolver}},
+            { path: 'activity/edit', component: ActivityEditComponent,
+                resolve: {activities: ActivityEditResolver}},
             { path: 'members', component: MemberListComponent,
                 resolve: {users: MemberListResolver}},
             { path: 'members/:id', component: MemberDetailComponent,
@@ -27,8 +35,10 @@ export const appRoutes: Routes = [
             { path: 'member/edit', component: MemberEditComponent,
                 resolve: {user: MemberEditResolver},
                 canDeactivate: [PreventUnsavedChanges]},
-            { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver}},
-            { path: 'lists', component: ListsComponent, resolve: {users: ListResolver}}
+            { path: 'messages', component: MessagesComponent,
+                resolve: {messages: MessagesResolver}},
+            { path: 'lists', component: ListsComponent,
+                resolve: {users: ListResolver}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'},

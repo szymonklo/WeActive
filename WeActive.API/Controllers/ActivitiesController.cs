@@ -35,10 +35,13 @@ namespace WeActive.API.Controllers
 
             var activityFromRepo = await _repo.GetActivity(id);
 
+            var activity = _mapper.Map<IEnumerable<ActivityToReturnDto>>(activityFromRepo);
+
+
             if (activityFromRepo == null)
                 return NotFound();
 
-            return Ok(activityFromRepo);
+            return Ok(activity);
         }
 
         [HttpGet]
@@ -51,18 +54,22 @@ namespace WeActive.API.Controllers
 
             var activitiesFromRepo = await _repo.GetActivities(activityParams);
 
-            // var activitys = _mapper.Map<IEnumerable<ActivityToReturnDto>>(activityFromRepo);
+            var activities = _mapper.Map<IEnumerable<ActivityToReturnDto>>(activitiesFromRepo);
 
             Response.AddPagination(activitiesFromRepo.CurrentPage, activitiesFromRepo.PageSize,
                 activitiesFromRepo.TotalCount, activitiesFromRepo.TotalPages);
 
-                return Ok(activitiesFromRepo);
+                return Ok(activities);
         }
 
         [HttpPost]
         // public async Task<IActionResult> CreateActivity(int userId, ActivityForCreationDto activityForCreationDto)
         public async Task<IActionResult> CreateActivity(Activity activity)
         {
+            
+            // if (activity.HostId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     return Unauthorized();
+
             activity.HostId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             // var activity = _mapper.Map<Activity>(activityForCreationDto);
@@ -77,6 +84,31 @@ namespace WeActive.API.Controllers
             }
 
             throw new Exception("Creating the activity failed on save");
+        }
+
+        [HttpPut("{id}")]
+        // public async Task<IActionResult> CreateActivity(int userId, ActivityForCreationDto activityForCreationDto)
+        public async Task<IActionResult> CreateActivity(int id, Activity activity)
+        {
+            if (activity.HostId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            //activity.HostId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            // var activity = _mapper.Map<Activity>(activityForCreationDto);
+
+            var activityFromRepo = await _repo.GetActivity(id);
+
+            activityFromRepo = activity;
+
+
+            if (await _repo.SaveAll())
+            {
+                // var activityToReturn = _mapper.Map<ActivityToReturnDto>(activity);
+                return NoContent();
+
+            }
+
+            throw new Exception("Updating the activity failed on save");
         }
 
         // TODO - Cancel and delete after defined time

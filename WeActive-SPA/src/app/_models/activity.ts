@@ -1,4 +1,4 @@
-import { User } from './user'
+import { User } from './user';
 import { Participant } from './participant';
 
 export interface Activity {
@@ -7,6 +7,8 @@ export interface Activity {
     name: string;
     hostId: number;
     host: User;
+    hostUsername: string;
+    hostPhotoUrl: string;
 
     privateActivity: boolean;
 

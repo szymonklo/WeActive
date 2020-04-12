@@ -13,6 +13,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeagoModule } from 'ngx-timeago';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+// import {MatIconModule} from '@angular/material/icon'
+// import { MatIconRegistry, MatIconModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -35,6 +38,12 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { ListResolver } from './_resolvers/list.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { ActivityEditComponent } from './activities/activity-edit/activity-edit.component';
+import { ActivityListComponent } from './activities/activity-list/activity-list.component';
+import { ActivityDetailComponent } from './activities/activity-detail/activity-detail.component';
+import { ActivityCardComponent } from './activities/activity-card/activity-card.component';
+import { ActivityListResolver } from './_resolvers/activity-list.resolver';
+import { ActivityEditResolver } from './_resolvers/activity-edit.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -61,7 +70,11 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       MemberDetailComponent,
       MemberEditComponent,
       PhotoEditorComponent,
-      MemberMessagesComponent
+      MemberMessagesComponent,
+      ActivityEditComponent,
+      ActivityListComponent,
+      ActivityDetailComponent,
+      ActivityCardComponent
    ],
    imports: [
       BrowserModule,
@@ -69,6 +82,9 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       FormsModule,
       ReactiveFormsModule,
       BsDatepickerModule.forRoot(),
+      OwlDateTimeModule,
+      OwlNativeDateTimeModule,
+      // MatIconModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       PaginationModule.forRoot(),
@@ -77,9 +93,11 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       RouterModule.forRoot(appRoutes),
       HttpClientModule, NgxGalleryModule,
       FileUploadModule,
+      TimeagoModule,
       TimeagoModule.forRoot(),
       JwtModule.forRoot({
          config: {
+            // tslint:disable-next-line: object-literal-shorthand
             tokenGetter: tokenGetter,
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
@@ -95,6 +113,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       PreventUnsavedChanges,
       ListResolver,
       MessagesResolver,
+      ActivityListResolver,
+      ActivityEditResolver,
       { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],
    bootstrap: [

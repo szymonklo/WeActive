@@ -13,7 +13,7 @@ export class MemberCardComponent implements OnInit {
   @Input() user: User;
 
   constructor(private authservice: AuthService, private userService: UserService,
-    private alertify: AlertifyService) { }
+              private alertify: AlertifyService) { }
 
   ngOnInit() {
   }

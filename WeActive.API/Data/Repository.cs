@@ -52,7 +52,7 @@ namespace WeActive.API.Data
             return user;
         }
 
-        public async  Task<PagedList<User>> GetUsers(UserParams userParams)
+        public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
 
             var users = _context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
@@ -60,19 +60,19 @@ namespace WeActive.API.Data
             users = users.Where(u => u.Id != userParams.UserId);
             users = users.Where(u => u.Gender == userParams.Gender);
 
-            if(userParams.Likers)
+            if (userParams.Likers)
             {
                 var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
-                users= users.Where(u => userLikers.Contains(u.Id));
+                users = users.Where(u => userLikers.Contains(u.Id));
             }
 
-            if(userParams.Likees)
+            if (userParams.Likees)
             {
                 var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
-                users= users.Where(u => userLikees.Contains(u.Id));
+                users = users.Where(u => userLikees.Contains(u.Id));
             }
 
-            if (userParams.MinAge != 18 || userParams.MaxAge!= 99)
+            if (userParams.MinAge != 18 || userParams.MaxAge != 99)
             {
                 var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
                 var maxDob = DateTime.Today.AddYears(-userParams.MinAge - 1);
@@ -82,7 +82,7 @@ namespace WeActive.API.Data
 
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
-                switch(userParams.OrderBy)
+                switch (userParams.OrderBy)
                 {
                     case "created":
                         users = users.OrderByDescending(u => u.Created);
@@ -100,7 +100,7 @@ namespace WeActive.API.Data
         {
             var user = await _context.Users
             .Include(x => x.Likers)
-            .Include(x=> x.Likees)
+            .Include(x => x.Likees)
             .FirstOrDefaultAsync(u => u.Id == id);
 
             if (likers)
@@ -147,7 +147,7 @@ namespace WeActive.API.Data
                     break;
             }
             messages = messages.OrderByDescending(d => d.MessageSent);
-            
+
             return await PagedList<Message>.CreateAsync(messages,
                 messageParams.PageNumber, messageParams.PageSize);
         }
@@ -159,7 +159,7 @@ namespace WeActive.API.Data
                 .Include(u => u.Recipient).ThenInclude(p => p.Photos)
                 .Where(m => m.RecipientId == userId && m.RecipientDeleted == false
                     && m.SenderId == recipientId
-                    || m.RecipientId == recipientId && m.SenderDeleted == false 
+                    || m.RecipientId == recipientId && m.SenderDeleted == false
                     && m.SenderId == userId)
                 .OrderByDescending(m => m.MessageSent)
                 .ToListAsync();
@@ -169,17 +169,23 @@ namespace WeActive.API.Data
 
         public async Task<Activity> GetActivity(int id)
         {
-            var activity = await _context.Activities.FirstOrDefaultAsync(a => a.Id == id);
+            var activity = await _context.Activities
+                .Include(u => u.Host)
+                .ThenInclude(p => p.Photos)
+                .FirstOrDefaultAsync(a => a.Id == id);
 
             return activity;
         }
 
         public async Task<PagedList<Activity>> GetActivities(ActivityParams activityParams)
         {
-            var activities = _context.Activities.AsQueryable();
+            var activities = _context.Activities
+                .Include(u => u.Host)
+                .ThenInclude(p => p.Photos)
+                .AsQueryable();
 
             return await PagedList<Activity>.CreateAsync(activities,
-                activityParams.PageNumber, activityParams.PageSize);;
+                activityParams.PageNumber, activityParams.PageSize); ;
         }
     }
 }
