@@ -14,6 +14,7 @@ export class ParticipantCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.participant);
     this.participantStatus = ParticipantStatus[this.participant.participantStatus];
   }
 

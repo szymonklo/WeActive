@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WeActive.API.Controllers
 {
-    [ServiceFilter(typeof(LogUserActivity))]
+    //[ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -35,7 +35,7 @@ namespace WeActive.API.Controllers
 
             var activityFromRepo = await _repo.GetActivity(id);
 
-            var activity = _mapper.Map<IEnumerable<ActivityToReturnDto>>(activityFromRepo);
+            var activity = _mapper.Map<ActivityToReturnDto>(activityFromRepo);
 
 
             if (activityFromRepo == null)
@@ -88,7 +88,8 @@ namespace WeActive.API.Controllers
 
         [HttpPut("{id}")]
         // public async Task<IActionResult> CreateActivity(int userId, ActivityForCreationDto activityForCreationDto)
-        public async Task<IActionResult> CreateActivity(int id, Activity activity)
+        // public async Task<IActionResult> CreateActivity(int id, Activity activity)
+        public async Task<IActionResult> UpdateActivity(int id, ActivityForUpdateDto activity)
         {
             if (activity.HostId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -96,9 +97,13 @@ namespace WeActive.API.Controllers
 
             // var activity = _mapper.Map<Activity>(activityForCreationDto);
 
+            //hack
+            //activity.Participants = null;
+
             var activityFromRepo = await _repo.GetActivity(id);
 
-            activityFromRepo = activity;
+            // activityFromRepo = activity;
+            _mapper.Map(activity, activityFromRepo);
 
 
             if (await _repo.SaveAll())

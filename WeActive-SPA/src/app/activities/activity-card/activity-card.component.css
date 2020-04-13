@@ -3,7 +3,7 @@ img {
     border: 2px solid white;
     display: inline;
 }
-img.host {
+img.host, .host-img {
     border: 3px solid #D9230F;
     padding: 3px;
 }
@@ -33,4 +33,8 @@ div.card-body {
 hr {
     border-top: 2px dotted #D9230F;
     margin: 0;
+}
+
+a.header-link {
+    color: white;
 }

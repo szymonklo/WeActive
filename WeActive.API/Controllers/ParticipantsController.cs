@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WeActive.API.Controllers
 {
-    //[ServiceFilter(typeof(LogUserActivity))]
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/activities/{activityId}/[controller]")]
     [ApiController]

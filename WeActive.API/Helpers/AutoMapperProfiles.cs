@@ -31,8 +31,11 @@ namespace WeActive.API.Helpers
                 .ForMember(m => m.RecipientPhotoUrl, opt => opt
                     .MapFrom(u => u.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<Activity, ActivityToReturnDto>()
-                .ForMember(dest => dest.HostPhotoUrl, opt => 
-                    opt.MapFrom(src => src.Host.Photos.FirstOrDefault(p => p.IsMain).Url));
+                // .ForMember(dest => dest.HostPhotoUrl, opt => 
+                //     opt.MapFrom(src => src.Host.Photos.FirstOrDefault(p => p.IsMain).Url))
+                    .ReverseMap();
+            CreateMap<ActivityForUpdateDto, Activity>();
+
                 
         }
     }

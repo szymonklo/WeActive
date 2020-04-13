@@ -16,12 +16,17 @@ export class ActivityEditResolver implements Resolve<Activity> {
                  private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Activity> {
-        let activityId = route.data['activity'];
+        console.log(route);
+
+        let activityId = route.params['id'];
+        console.log(activityId);
         if (activityId) {
+            console.log('Resolver returns: ');
+            console.log(this.activityService.getActivity(activityId));
             return this.activityService.getActivity(activityId).pipe(
                 catchError(error => {
                     this.alertify.error('Problem retrieving your data');
-                    this.router.navigate(['/members']);
+                    this.router.navigate(['/activities']);
                     return of(null);
                 })
             );

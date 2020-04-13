@@ -21,6 +21,7 @@ export class ActivityEditComponent implements OnInit {
   user: User;
   activity: Activity;
   form: FormGroup;
+  activityId: number;
 
   // @HostListener('window:beforeunload', ['$event'])
   // unloadNotification($event: any) {
@@ -33,17 +34,33 @@ export class ActivityEditComponent implements OnInit {
               private activityService: ActivityService, private authService: AuthService) { }
 
   ngOnInit() {
+    console.log('This route data: ');
+    console.log(this.route.data);
     this.route.data.subscribe(data => {
-      this.user = data['user'];
+      this.activity = data['activity'];
     });
     this.createAcvitityEditForm();
+    if (this.activity != null) {
+      this.activityId = this.activity?.id;
+      this.form.patchValue(this.activity);
+    }
   }
 
   submit() {
-    this.activity = Object.assign({}, this.form.value);
-    // this.actvity.hostId = this.user.id;
+    if (this.form.getRawValue().id != null) {
+      this.activity = Object.assign(this.activity, this.form.value);
+    } else {
+      this.activity = Object.assign({}, this.form.value);
+    }
+    this.activity = Object.assign(this.activity, this.form.value);
+    // this.activity = Object.assign({}, this.form.value);
+    this.activity.id = this.activityId;
+    //this.activity.hostId = this.user.id;
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.activity.hostPhotoUrl = photoUrl);
     this.activity.hostUsername = this.authService.currentUser.username;
+
+    console.log(this.activity);
+
     if (this.form.getRawValue().id != null) {
       this.updateActivity();
     } else {
@@ -88,7 +105,7 @@ export class ActivityEditComponent implements OnInit {
       endDate: ['', Validators.required],
       flexEndDate: [false, Validators.required],
 
-      activityType: [''],
+      activityType: [''], // check why patchValue not working
 
       minParticipantsNumber: ['', Validators.required],
       maxParticipantsNumber: ['', Validators.required],

@@ -1,6 +1,6 @@
 <!-- Participants -->
 <div class="row">
-  <div *ngFor="let participant of participants" class="col-lg-2 col-md-3 col-sm-6">
+  <div *ngFor="let participant of participants" class="col-4">
     <app-participant-card [participant]="participant"></app-participant-card>
   </div>
   <i class="material-icons md-36" (click) = "addParticipant()">person_add</i>

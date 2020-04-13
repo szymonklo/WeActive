@@ -169,12 +169,14 @@ namespace WeActive.API.Data
 
         public async Task<Activity> GetActivity(int id)
         {
-            var activity = await _context.Activities
-                .Include(u => u.Host)
-                .ThenInclude(p => p.Photos)
-                .Include(u => u.Participants.Select(p => p.User))
-                .ThenInclude(p => p.Photos)
-                .FirstOrDefaultAsync(a => a.Id == id);
+            // temp
+            var activitys = await _context.Activities.ToListAsync();
+                // .Include(u => u.Host)
+                // .ThenInclude(p => p.Photos)
+                // .Include(u => u.Participants.Select(p => p.User))
+                // .ThenInclude(p => p.Photos)
+                var activity = activitys.Where(a => a.Id == id).FirstOrDefault();
+                // .FirstOrDefaultAsync(a => a.Id == id);
 
             return activity;
         }

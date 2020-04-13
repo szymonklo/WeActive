@@ -18,7 +18,7 @@ export class ActivityCardComponent implements OnInit {
     console.log(this.activity);
     console.log(this.activity.host);
     console.log(this.activity.host?.photoUrl);
-    this.activityType = ActivityType[this.activity.activityType];
+    this.activityType = ActivityType[this.activity.activityType]; // wrong num
     console.log(this.activityType);
 
   }
