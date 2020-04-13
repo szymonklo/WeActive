@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Activity, ActivityType } from 'src/app/_models/activity';
 
+
 @Component({
   selector: 'app-activity-card',
   templateUrl: './activity-card.component.html',
@@ -9,6 +10,7 @@ import { Activity, ActivityType } from 'src/app/_models/activity';
 export class ActivityCardComponent implements OnInit {
   @Input() activity: Activity;
   activityType: string;
+  duration: Date;
 
   constructor() { }
 

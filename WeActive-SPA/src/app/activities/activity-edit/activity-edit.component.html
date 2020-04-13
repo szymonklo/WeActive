@@ -92,12 +92,36 @@
             </tab>
             <tab heading="Participants">
               <div>
+                <strong>Participants number:</strong>
+                <!-- Participants -->
+                <div class="form-inline">
 
+                  Now: {{activity?.participantsNumber || 0}} <i class="material-icons md-36">people</i>
+
+                  <input type="number"
+                  [ngClass]="{'is-invalid': form.get('minParticipantsNumber').errors
+                    && form.get('minParticipantsNumber').touched}"
+                  class="form-control" formControlName="minParticipantsNumber" placeholder="Min">
+                  <div class="invalid-feedback" *ngIf="form.get('minParticipantsNumber').hasError('required')
+                  && form.get('minParticipantsNumber').touched">Please specify minimum participant number</div>
+
+
+                  <input type="number"
+                  [ngClass]="{'is-invalid': form.get('maxParticipantsNumber').errors
+                    && form.get('maxParticipantsNumber').touched}"
+                  class="form-control" formControlName="maxParticipantsNumber" placeholder="Max">
+                  <div class="invalid-feedback" *ngIf="form.get('maxParticipantsNumber').hasError('required')
+                  && form.get('maxParticipantsNumber').touched">Please specify maximum participant number</div>
+                </div>
+                <strong>Participants list:</strong>
+                <div>
+                  TODO - participants list
+                </div>
               </div>
             </tab>
             <tab heading="Conversation">
               <div>
-                
+                TODO - conversations
               </div>
             </tab>
           </tabset>

@@ -172,6 +172,8 @@ namespace WeActive.API.Data
             var activity = await _context.Activities
                 .Include(u => u.Host)
                 .ThenInclude(p => p.Photos)
+                .Include(u => u.Participants.Select(p => p.User))
+                .ThenInclude(p => p.Photos)
                 .FirstOrDefaultAsync(a => a.Id == id);
 
             return activity;
@@ -186,6 +188,22 @@ namespace WeActive.API.Data
 
             return await PagedList<Activity>.CreateAsync(activities,
                 activityParams.PageNumber, activityParams.PageSize); ;
+        }
+
+        public async Task<IEnumerable<Participant>> GetParticipants(int activityId)
+        {
+            var participants = await _context.Participants
+                .Where(p => p.ActivityId == activityId).ToListAsync();
+
+            return participants;
+        }
+
+        public async Task<Participant> GetParticipant(int activityId, int userId)
+        {
+            var participant = await _context.Participants
+                .FirstOrDefaultAsync(p => p.ActivityId == activityId && p.UserId == userId);
+
+            return participant;
         }
     }
 }

@@ -2,6 +2,10 @@ input[type=checkbox] {
     margin-top: 5px;
 }
 
+input[type=number] {
+    width: min-content;
+}
+
 .activityType {
     margin-left: 10px;
     margin-right: 10px;

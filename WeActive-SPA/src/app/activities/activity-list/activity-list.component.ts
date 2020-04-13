@@ -7,7 +7,6 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { Activity } from 'src/app/_models/activity';
 import { ActivityService } from 'src/app/_services/activity.service';
 
-
 @Component({
   selector: 'app-activity-list',
   templateUrl: './activity-list.component.html',

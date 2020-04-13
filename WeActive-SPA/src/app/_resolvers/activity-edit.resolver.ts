@@ -18,7 +18,7 @@ export class ActivityEditResolver implements Resolve<Activity> {
     resolve(route: ActivatedRouteSnapshot): Observable<Activity> {
         let activityId = route.data['activity'];
         if (activityId) {
-            return this.activityService.getActivity(route.data['activity']).pipe(
+            return this.activityService.getActivity(activityId).pipe(
                 catchError(error => {
                     this.alertify.error('Problem retrieving your data');
                     this.router.navigate(['/members']);

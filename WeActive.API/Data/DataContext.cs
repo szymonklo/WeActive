@@ -15,6 +15,7 @@ namespace WeActive.API.Data
         public DbSet<Like> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<Participant> Participants { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Like>()

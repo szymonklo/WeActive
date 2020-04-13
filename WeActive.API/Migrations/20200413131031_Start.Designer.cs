@@ -9,8 +9,8 @@ using WeActive.API.Data;
 namespace WeActive.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200411122350_AddedActivity")]
-    partial class AddedActivity
+    [Migration("20200413131031_Start")]
+    partial class Start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,7 +153,7 @@ namespace WeActive.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Participant");
+                    b.ToTable("Participants");
                 });
 
             modelBuilder.Entity("WeActive.API.Models.Photo", b =>
@@ -228,6 +228,9 @@ namespace WeActive.API.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");

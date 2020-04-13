@@ -1,19 +1,27 @@
-<div class="card mb-2">
-  <div class="card-img-wrapper">
-    <strong>Activity Type: </strong>
+<div class="activity-card">
+  <div class="card-header">
+    <h3>{{activity.name}}</h3>
+  </div>
+  <div class="card-body">
+    Activity Type:
     <!-- TODO - implement icon -->
-    <h3>{{activityType}}</h3>  
+    {{activityType}}
     <hr>
-    <h2>{{activity.name}}</h2>
+    Date and time <br>
+    From:
+    {{activity.startDate | date:'short'}}<br>
+    To:
+    {{activity.endDate | date:'short'}}
     <hr>
-    <h3>{{activity.startDate | date}}</h3>
-    <h3>{{activity.endDate}}</h3>
+    Localization:
+    {{activity.place}}
     <hr>
-    <h3>{{activity.place}}</h3>
-    <hr>
-    <!-- Implement photofor user -->
-    <img src="{{activity.hostPhotoUrl || '../../../assets/user.png'}}" alt="{{activity.hostUsername}}">
-    <h3>{{activity.hostUsername}}</h3>
+    Participants:<br>
+    <div>
+      <img class="host" src="{{activity.host?.photoUrl || '../../../assets/user.png'}}" alt="{{activity.hostUsername}}"><br>
+      {{activity.hostUsername | titlecase}}
+      <app-participant-list [activityId]="activity.id"></app-participant-list>
+    <div>
     <!-- <img class="card-img-top" src="{{user.photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}"> -->
     <ul class="list-inline member-icons animate text-center">
       <li class="list-inline-item">

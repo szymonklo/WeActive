@@ -6,6 +6,7 @@ import {Activity } from '../_models/activity';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
+import { Participant } from '../_models/participant';
 
 @Injectable({
   providedIn: 'root'
@@ -83,6 +84,14 @@ export class ActivityService {
 
   updateActivity(id: number, activity: Activity) {
     return this.http.put(this.baseUrl + 'activities/' + id, activity);
+  }
+
+  getParticipants(activityId: number) {
+    return this.http.get(this.baseUrl + 'activities/' + activityId + '/participants');
+  }
+
+  addParticipant(activityId: number, userId: number, participant: Participant) {
+    return this.http.post(this.baseUrl + 'activities/' + activityId + '/participants/' + userId, participant);
   }
 
   // getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
