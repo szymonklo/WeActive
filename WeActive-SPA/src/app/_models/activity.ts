@@ -38,8 +38,8 @@ export interface Activity {
 export enum ActivityType {
     Undefined,
     Cycling,
-    Trekking,
     Running,
+    Trekking,
     Climbing,
     Skiing
 }

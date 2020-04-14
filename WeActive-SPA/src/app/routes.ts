@@ -30,6 +30,8 @@ export const appRoutes: Routes = [
                 resolve: {activity: ActivityEditResolver}},
             { path: 'activity/:id/participants', component: ParticipantListComponent,
                 resolve: {participants: ParticipantListResolver}},
+            { path: 'activities/:id', component: ActivityListComponent,
+                resolve: {activities: ActivityListResolver}},
             { path: 'activities', component: ActivityListComponent,
                 resolve: {activities: ActivityListResolver}},
             { path: 'activity/edit', component: ActivityEditComponent,

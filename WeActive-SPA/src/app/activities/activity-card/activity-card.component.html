@@ -19,13 +19,14 @@
     Localization:
     {{activity.place}}
     <hr>
-    Participants:<br>
+    Host:<br>
     <div>
       <div class="host-img col-4">
         <app-member-miniature [userId]="activity.hostId"></app-member-miniature>
       </div>
-      <!-- <img class="host" src="{{activity.host?.photoUrl || '../../../assets/user.png'}}" alt="{{activity.hostUsername}}"><br>
-      {{activity.hostUsername | titlecase}} -->
+      <br>
+      <hr>
+      Participants:
       <app-participant-list [activityId]="activity.id"></app-participant-list>
     <div>
     <!-- <img class="card-img-top" src="{{user.photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}"> -->

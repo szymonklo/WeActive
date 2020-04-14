@@ -3,5 +3,8 @@
   <div *ngFor="let participant of participants" class="col-4">
     <app-participant-card [participant]="participant"></app-participant-card>
   </div>
-  <i class="material-icons md-36" (click) = "addParticipant()">person_add</i>
+  <button class="join">
+    <i class="material-icons md-36" (click) = "addParticipant()">person_add</i><br>
+    Join
+  </button>
 </div>

@@ -55,9 +55,23 @@ export class ActivityService {
   //     );
   // }
 
-  getActivities(page?, itemsPerPage?, userParams?, likeParams?): Observable<PaginatedResult<Activity[]>> {
+  getActivities(page?, itemsPerPage?, activityParams?, likeParams?): Observable<PaginatedResult<Activity[]>> {
     const paginatedResult: PaginatedResult<Activity[]> = new PaginatedResult<Activity[]>();
+    
     let params = new HttpParams();  // temp
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    console.log('service params');
+    console.log(activityParams);
+    if (activityParams !== {})
+    {
+      console.log('notnull');
+      params = params.append('activityType', activityParams.activityType);
+      console.log(params);
+    }
 
     return this.http.get<Activity[]>(this.baseUrl + 'activities', { observe: 'response', params})
       .pipe (

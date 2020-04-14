@@ -188,6 +188,11 @@ namespace WeActive.API.Data
                 .ThenInclude(p => p.Photos)
                 .AsQueryable();
 
+            if ((ActivityType) activityParams.activityType != ActivityType.Undefined)    //check
+            {
+                activities = activities.Where(a => a.ActivityType == (ActivityType) activityParams.activityType);
+            }
+
             return await PagedList<Activity>.CreateAsync(activities,
                 activityParams.PageNumber, activityParams.PageSize); ;
         }

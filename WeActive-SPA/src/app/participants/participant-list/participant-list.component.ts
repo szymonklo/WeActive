@@ -46,11 +46,11 @@ export class ParticipantListComponent implements OnInit {
       this.activityId, this.authService.decodedToken.nameid, newParticipant)
       .subscribe(() => {
         this.alertify.success('You joined this activity');
+        this.participants.unshift(newParticipant);
       }, error => {
         this.alertify.error(error);
       });
     console.log('test_addParticipant_from_participant-list.component');
-
   }
 
 }

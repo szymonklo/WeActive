@@ -105,7 +105,7 @@ export class ActivityEditComponent implements OnInit {
       endDate: ['', Validators.required],
       flexEndDate: [false, Validators.required],
 
-      activityType: [''], // check why patchValue not working
+      activityType: [''], // check why patchValue not working, check why unable to create undefined
 
       minParticipantsNumber: ['', Validators.required],
       maxParticipantsNumber: ['', Validators.required],

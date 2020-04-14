@@ -5,3 +5,8 @@ div.col-4 {
 div.row {
     padding: 10px;
 }
+
+button.join {
+    border: 2px dotted #D9230F;
+    margin: 2px;
+}

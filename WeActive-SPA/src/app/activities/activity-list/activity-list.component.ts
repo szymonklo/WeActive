@@ -14,7 +14,7 @@ import { ActivityService } from 'src/app/_services/activity.service';
 })
 export class ActivityListComponent implements OnInit {
   activities: Activity[];
-  userParams: any = {};
+  activityParams: any = {};
   pagination: Pagination;
 
 
@@ -27,10 +27,6 @@ export class ActivityListComponent implements OnInit {
       this.activities = data['activities'].result;
       this.pagination = data['activities'].pagination;
     });
-
-    this.userParams.minAge = 18;
-    this.userParams.maxAge = 99;
-    this.userParams.orderBy = 'lastActive';
   }
 
   pageChanged(event: any): void {
@@ -39,14 +35,12 @@ export class ActivityListComponent implements OnInit {
   }
 
   resetFilters() {
-    this.userParams.minAge = 18;
-    this.userParams.maxAge = 99;
     this.loadActivities();
   }
 
   loadActivities() {
     this.activityService.getActivities(this.pagination.currentPage, this.pagination.itemsPerPage,
-      this.userParams)
+      this.activityParams)
       .subscribe((res: PaginatedResult<Activity[]>) => {
       this.activities = res.result;
       this.pagination = res.pagination;

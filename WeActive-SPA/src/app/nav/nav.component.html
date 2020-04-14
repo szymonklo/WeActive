@@ -5,6 +5,26 @@
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item active" routerLinkActive="active"> 
         <a class="nav-link" [routerLink]="['/activities']">Activities</a>
+      </li>
+
+      <li class="nav-item active" routerLinkActive="active"> 
+        <a class="nav-link" [routerLink]="['/activities/Cycling']">
+          <i class="material-icons md-36">directions_bike</i>
+        </a>
+      </li>
+
+      <li class="nav-item active" routerLinkActive="active"> 
+        <a class="nav-link" [routerLink]="['/activities/Running']">
+          <i class="material-icons md-36">directions_run</i>
+        </a>
+      </li>
+
+      <li class="nav-item active" routerLinkActive="active"> 
+        <a class="nav-link" [routerLink]="['/activities/Trekking']">
+          <i class="material-icons md-36">directions_walk</i><i class="material-icons md-36">terrain</i>
+        </a>
+      </li>
+
       <li class="nav-item active" routerLinkActive="active"> 
         <a class="nav-link" [routerLink]="['/members']">Users</a>
       </li>

@@ -89,21 +89,22 @@ namespace WeActive.API.Controllers
         [HttpPut("{id}")]
         // public async Task<IActionResult> CreateActivity(int userId, ActivityForCreationDto activityForCreationDto)
         // public async Task<IActionResult> CreateActivity(int id, Activity activity)
-        public async Task<IActionResult> UpdateActivity(int id, ActivityForUpdateDto activity)
+        public async Task<IActionResult> UpdateActivity(int id, ActivityForUpdateDto activityForUpdate)
         {
-            if (activity.HostId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (activityForUpdate.HostId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
             //activity.HostId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             // var activity = _mapper.Map<Activity>(activityForCreationDto);
 
+            //TODO - fix error when updating with no change
             //hack
             //activity.Participants = null;
 
             var activityFromRepo = await _repo.GetActivity(id);
 
             // activityFromRepo = activity;
-            _mapper.Map(activity, activityFromRepo);
+            _mapper.Map(activityForUpdate, activityFromRepo);
 
 
             if (await _repo.SaveAll())
