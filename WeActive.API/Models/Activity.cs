@@ -40,5 +40,5 @@ namespace WeActive.API.Models
     
 
     public enum ActivityType { Undefined, Cycling, Running, Trekking, Climbing, Skiing}
-    public enum Status { Undefined, Planed, Confirmed, Cancelled}
+    public enum Status { Undefined, Planned, Confirmed, Cancelled}
 }

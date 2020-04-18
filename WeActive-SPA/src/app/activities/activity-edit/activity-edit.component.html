@@ -113,9 +113,9 @@
                   <div class="invalid-feedback" *ngIf="form.get('maxParticipantsNumber').hasError('required')
                   && form.get('maxParticipantsNumber').touched">Please specify maximum participant number</div>
                 </div>
-                <strong>Participants list:</strong>
-                <div>
-                  TODO - participants list
+                <div *ngIf="activity?.id != null">
+                  <strong>Participants list:</strong>
+                  <app-participant-list  [activityId]="activity.id"></app-participant-list>>
                 </div>
               </div>
             </tab>

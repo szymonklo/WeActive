@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Activity, ActivityType } from 'src/app/_models/activity';
+import { Activity, ActivityType, Status } from 'src/app/_models/activity';
 
 
 @Component({
@@ -10,6 +10,7 @@ import { Activity, ActivityType } from 'src/app/_models/activity';
 export class ActivityCardComponent implements OnInit {
   @Input() activity: Activity;
   activityType: string;
+  activityStatus: string;
   duration: Date;
 
   constructor() { }
@@ -18,8 +19,11 @@ export class ActivityCardComponent implements OnInit {
     console.log(this.activity);
     console.log(this.activity.host);
     console.log(this.activity.host?.photoUrl);
-    this.activityType = ActivityType[this.activity.activityType]; // wrong num
+    // this.activityType = this.activity.activityType.toString();
+    this.activityType = ActivityType[this.activity.activityType];
+    this.activityStatus = Status[this.activity.status];
     console.log(this.activityType);
+    console.log(ActivityType);
 
   }
 

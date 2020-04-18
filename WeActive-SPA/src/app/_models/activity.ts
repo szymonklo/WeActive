@@ -46,7 +46,7 @@ export enum ActivityType {
 
 export enum Status {
     Undefined,
-    Planed,
+    Planned,
     Confirmed,
     Cancelled
 }

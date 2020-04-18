@@ -8,7 +8,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 // import { Activity } from 'src/app/_models/activity';
 import { ActivityService } from 'src/app/_services/activity.service';
-import {Activity, } from '../../_models/activity';
+import {Activity, Status, } from '../../_models/activity';
 
 
 @Component({
@@ -17,7 +17,7 @@ import {Activity, } from '../../_models/activity';
   styleUrls: ['./activity-edit.component.css']
 })
 export class ActivityEditComponent implements OnInit {
-  //@ViewChild('editForm', {static: true}) editForm: NgForm;
+  // @ViewChild('editForm', {static: true}) editForm: NgForm;
   user: User;
   activity: Activity;
   form: FormGroup;
@@ -55,7 +55,13 @@ export class ActivityEditComponent implements OnInit {
     this.activity = Object.assign(this.activity, this.form.value);
     // this.activity = Object.assign({}, this.form.value);
     this.activity.id = this.activityId;
-    //this.activity.hostId = this.user.id;
+    console.log(this.activity);
+    this.activity.status = Status.Confirmed;
+    console.log(Status.Confirmed);
+    console.log(Status.Planned);
+    this.activity.status = Status.Planned;
+    console.log(this.activity);
+    // this.activity.hostId = this.user.id;
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.activity.hostPhotoUrl = photoUrl);
     this.activity.hostUsername = this.authService.currentUser.username;
 
@@ -69,7 +75,7 @@ export class ActivityEditComponent implements OnInit {
   }
 
   cancel() {
-    this.form.reset();
+    this.form.reset(this.activity);
   }
 
   createActivity() {

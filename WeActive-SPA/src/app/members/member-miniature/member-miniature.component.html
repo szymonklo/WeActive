@@ -1,6 +1,6 @@
 <div>
   <img class="card-img-top" src="{{user?.photoUrl || '../../../assets/user.png'}}" alt="{{user?.knownAs}}">
   <h6 class="card-title text-center mb-1">
-    {{user?.username}}
+    {{user?.username | titlecase}}
   </h6>
 </div>

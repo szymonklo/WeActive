@@ -4,8 +4,9 @@ img {
     display: inline;
 }
 img.host, .host-img {
-    border: 3px solid #D9230F;
-    padding: 3px;
+    /* border: 3px solid white; */
+    padding-right: 15px;
+    margin: 0px;
 }
 
 div.activity-card {
@@ -18,6 +19,9 @@ div.card-header {
     background-color: #D9230F;
     color: white;
     padding: 5px;
+    padding-bottom: 0px;
+    margin: 0px;
+    text-align: center;
 }
 
 h3 {
@@ -37,4 +41,12 @@ hr {
 
 a.header-link {
     color: white;
+}
+
+p.type {
+    vertical-align: middle;
+}
+
+.row {
+    margin-bottom: 0px;
 }

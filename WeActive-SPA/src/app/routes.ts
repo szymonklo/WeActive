@@ -18,6 +18,7 @@ import { ActivityEditComponent } from './activities/activity-edit/activity-edit.
 import { ActivityEditResolver } from './_resolvers/activity-edit.resolver';
 import { ParticipantListComponent } from './participants/participant-list/participant-list.component';
 import { ParticipantListResolver } from './_resolvers/participant-list.resolver';
+import { ActivityDetailComponent } from './activities/activity-detail/activity-detail.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -26,6 +27,8 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
+            { path: 'activity/:id/detail', component: ActivityDetailComponent,
+                resolve: {activity: ActivityEditResolver}},
             { path: 'activity/:id/edit', component: ActivityEditComponent,
                 resolve: {activity: ActivityEditResolver}},
             { path: 'activity/:id/participants', component: ParticipantListComponent,
