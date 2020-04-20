@@ -19,12 +19,6 @@ export class ParticipantListComponent implements OnInit {
 
   ngOnInit() {
     this.loadParticipants();
-    // this.route.data.subscribe(data => {
-    //   console.log('Data: ');
-    //   console.log(data);
-    //   console.log('Participants: ' + data['participants']);
-    //   this.participants = data['participants'].result;
-    // });
   }
 
   loadParticipants() {
@@ -37,8 +31,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   addParticipant() {
-    console.log('joining started');
-    let newParticipant: any = {};
+    const newParticipant: any = {};
     newParticipant.activityId = this.activityId;
     newParticipant.userId = this.authService.decodedToken.nameid;
     newParticipant.participantStatus = ParticipantStatus.Joined;
@@ -50,7 +43,5 @@ export class ParticipantListComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
-    console.log('test_addParticipant_from_participant-list.component');
   }
-
 }

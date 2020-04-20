@@ -212,5 +212,28 @@ namespace WeActive.API.Data
 
             return participant;
         }
+
+        public async Task<Comment> GetComment(int id)
+        {
+            var comment = await _context.Comments
+                .Include(c => c.Sender).ThenInclude(s => s.Photos)
+                .Include(c => c.Replies).ThenInclude(r => r.Sender).ThenInclude(s => s.Photos)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+
+            return comment;
+        }
+
+        public async Task<IEnumerable<Comment>> GetComments(int activityId)
+        {
+            var comments = await _context.Comments
+                .Include(c => c.Sender).ThenInclude(s => s.Photos)
+                .Include(c => c.Replies).ThenInclude(r => r.Sender).ThenInclude(s => s.Photos)
+                .Where(c => c.ActivityId == activityId)
+                .OrderByDescending(m => m.TimeSent)
+                .ToListAsync();
+
+            return comments;
+        }
     }
 }

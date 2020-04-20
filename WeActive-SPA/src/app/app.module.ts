@@ -14,8 +14,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { TimeagoModule } from 'ngx-timeago';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-// import {MatIconModule} from '@angular/material/icon'
-// import { MatIconRegistry, MatIconModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -59,7 +57,6 @@ export class CustomHammerConfig extends HammerGestureConfig  {
    };
 }
 
-
 @NgModule({
    declarations: [
       AppComponent,
@@ -90,7 +87,6 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       BsDatepickerModule.forRoot(),
       OwlDateTimeModule,
       OwlNativeDateTimeModule,
-      // MatIconModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       PaginationModule.forRoot(),

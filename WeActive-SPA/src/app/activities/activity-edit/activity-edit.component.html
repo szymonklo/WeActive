@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="card">
-          <!-- <img class="card-img-top img-thumbnail" src="{{photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}"> -->
+          <!-- Host photo? -->
           <div class="card-body">
             <div>
               <strong>Activity Name:</strong>
@@ -87,6 +87,7 @@
               </div>
               <div>
                 <h4>Description</h4>
+                <!-- TOTO - Implement description -->
                 <textarea name="introduction" rows="6" class="form-control"></textarea>
               </div>
             </tab>
@@ -113,6 +114,7 @@
                   <div class="invalid-feedback" *ngIf="form.get('maxParticipantsNumber').hasError('required')
                   && form.get('maxParticipantsNumber').touched">Please specify maximum participant number</div>
                 </div>
+
                 <div *ngIf="activity?.id != null">
                   <strong>Participants list:</strong>
                   <app-participant-list  [activityId]="activity.id"></app-participant-list>>
@@ -121,7 +123,7 @@
             </tab>
             <tab heading="Conversation">
               <div>
-                TODO - conversations
+                <!-- TODO - conversations -->
               </div>
             </tab>
           </tabset>

@@ -16,19 +16,13 @@ export class ActivityListResolver implements Resolve<Activity[]> {
                 private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Activity[]> {
-        let activityType = route.params['id'];
-        console.log('resolver type');
-        console.log(activityType);
-        console.log(this.activityParams);
+        const activityType = route.params['id'];
 
-        if (activityType !== undefined)
-        {
-            console.log('not undefined');
+        if (activityType !== undefined) {
             this.activityParams.activityType = activityType;
         } else {
             this.activityParams = {};
         }
-        console.log(this.activityParams);
 
         return this.activityService.getActivities(this.pageNumber, this.pageSize, this.activityParams).pipe(
             catchError(error => {

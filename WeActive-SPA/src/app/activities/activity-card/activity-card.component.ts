@@ -16,15 +16,7 @@ export class ActivityCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.activity);
-    console.log(this.activity.host);
-    console.log(this.activity.host?.photoUrl);
-    // this.activityType = this.activity.activityType.toString();
     this.activityType = ActivityType[this.activity.activityType];
     this.activityStatus = Status[this.activity.status];
-    console.log(this.activityType);
-    console.log(ActivityType);
-
   }
-
 }

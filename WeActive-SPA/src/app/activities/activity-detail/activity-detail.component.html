@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <!-- <img class="card-img-top img-thumbnail" src="{{photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}"> -->
+        <!-- Host Photo? -->
         <div class="card-body">
           <div>
             <strong>Activity Name:</strong><br>
@@ -15,7 +15,6 @@
             <!-- Place -->
             {{activity.place}}
           </div>
-          
           <div>
             <strong>Start Date:</strong><br>
             <!-- StartDate -->
@@ -32,6 +31,7 @@
             <strong>Status: </strong>{{activityStatus}}
           </div>
         </div>
+        <!-- Div for host to manage -->
         <div *ngIf="canEdit()" class="card-footer">
           <button class="btn btn-success" (click)="confirm()">Confirm</button>
           <button class="btn btn-primary ml-2 mr-2" (click)="cancel()">Cancel</button>
@@ -46,34 +46,13 @@
         <tabset class="member-tabset activity-tabset">
           <tab heading="Description">
             <div>
-            
             <!-- Activity Type -->
             <!-- TODO - implement icon -->
-            {{activity.activityType}}
-            <!-- <div>
-              <label class="control-label"><strong>Activity Type: </strong></label>
-              <div class="text-center">
-                <label class="activityType">
-                  <div class="icon"><i class="material-icons md-36">directions_bike</i></div>
-                  <input class="mr-3" type="radio" value="Cycling" formControlName="activityType">Cycling
-                </label>
-                <label class="activityType">
-                  <div class="icon"><i class="material-icons md-36">directions_run</i></div>
-                  <input class="mr-3" type="radio" value="Trekking" formControlName="activityType">Running
-                </label>
-                <label class="activityType">
-                  <div class="icon"><i class="material-icons md-36">directions_walk</i>
-                  <i class="material-icons md-36">terrain</i></div>
-                  <input class="mr-3" type="radio" value="Running" formControlName="activityType">Trekking
-                </label>
-              </div>
-            </div> -->
+            {{activityType}}
             </div>
             <div>
               <h4>Description</h4>
-              <!-- <textarea name="introduction" rows="6" class="form-control">
-                Description
-              </textarea> -->
+              <!-- TODO - implement description -->
             </div>
           </tab>
           <tab heading="Participants">
@@ -84,9 +63,9 @@
 
                 Now: {{activity.participantsNumber || 0}} <i class="material-icons md-36">people</i>
 
-                Min: {{activity.minParticipantsNumber}}
+                (Min: {{activity.minParticipantsNumber}}
 
-                Max: {{activity.maxParticipantsNumber}}
+                Max: {{activity.maxParticipantsNumber}})
 
               </div>
               <strong>Participants list:</strong>

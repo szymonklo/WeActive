@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
-import { User } from '../../_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { Activity } from 'src/app/_models/activity';
@@ -16,8 +14,6 @@ export class ActivityListComponent implements OnInit {
   activities: Activity[];
   activityParams: any = {};
   pagination: Pagination;
-
-
 
   constructor(private activityService: ActivityService, private alertify: AlertifyService,
               private route: ActivatedRoute, private router: Router) { }

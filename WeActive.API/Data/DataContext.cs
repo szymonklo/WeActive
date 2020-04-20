@@ -16,6 +16,7 @@ namespace WeActive.API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Like>()
@@ -58,8 +59,18 @@ namespace WeActive.API.Data
                 .WithMany()
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Comment>()
+                .HasOne(c => c.Sender)
+                // .WithMany(m => m.MessagesSent)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Comment>()
+                .HasOne(c => c.Activity)
+                // .WithMany(m => m.MessagesReceived)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
         }
-
-
     }
 }

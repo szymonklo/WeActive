@@ -13,7 +13,7 @@ export class ListResolver implements Resolve<User[]> {
     likesParam = 'Likers';
 
     constructor(private userService: UserService,
-                 private router: Router, private alertify: AlertifyService) {}
+                private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
         return this.userService.getUsers(this.pageNumber, this.pageSize, null, this.likesParam).pipe(

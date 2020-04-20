@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { User } from 'src/app/_models/user';
-
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
-// import { Activity } from 'src/app/_models/activity';
 import { ActivityService } from 'src/app/_services/activity.service';
-import {Activity, Status, } from '../../_models/activity';
+import {Activity, Status, ActivityType, } from '../../_models/activity';
 
 
 @Component({
@@ -22,6 +18,7 @@ export class ActivityDetailComponent implements OnInit {
   activity: Activity;
   activityId: number;
   activityStatus: string;
+  activityType: string;
   userId: number;
 
   // @HostListener('window:beforeunload', ['$event'])
@@ -35,8 +32,6 @@ export class ActivityDetailComponent implements OnInit {
               private activityService: ActivityService, private authService: AuthService) { }
 
   ngOnInit() {
-    console.log('This route data: ');
-    console.log(this.route.data);
     this.route.data.subscribe(data => {
       this.activity = data['activity'];
     });
@@ -44,26 +39,19 @@ export class ActivityDetailComponent implements OnInit {
     if (this.activity != null) {
       this.activityId = this.activity?.id;
       this.activityStatus = Status[this.activity.status];
+      this.activityType = ActivityType[this.activity.activityType];
 
     }
   }
 
   canEdit() {
-    // console.log(typeof(this.activity.hostId));
-    // console.log(this.activity.hostId);
-    // console.log(typeof(this.userId));
-    // console.log(this.userId);
-    // console.log(this.activity.hostId == this.userId);
-
     if (this.activity.hostId === this.userId) {
       return true;
     }
-
     return false;
   }
 
   confirm() {
-    console.log(Status.Confirmed);
     this.activity.status = Status.Confirmed;
     this.updateActivity();
   }

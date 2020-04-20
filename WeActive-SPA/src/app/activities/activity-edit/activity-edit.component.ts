@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { User } from 'src/app/_models/user';
-
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
-// import { Activity } from 'src/app/_models/activity';
 import { ActivityService } from 'src/app/_services/activity.service';
 import {Activity, Status, } from '../../_models/activity';
 

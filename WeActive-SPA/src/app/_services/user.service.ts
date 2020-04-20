@@ -33,11 +33,11 @@ export class UserService {
       params = params.append('orderBy', userParams.orderBy);
     }
 
-    if(likeParams == 'Likers') {
+    if (likeParams === 'Likers') {
       params = params.append('likers', 'true');
     }
 
-    if(likeParams == 'Likees') {
+    if (likeParams === 'Likees') {
       params = params.append('likees', 'true');
     }
 
@@ -45,10 +45,7 @@ export class UserService {
       .pipe (
         map(response => {
           paginatedResult.result = response.body;
-          // if (response.headers.get('Pagination') != null) 
-          {
-            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-          }
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
           return paginatedResult;
         })
       );

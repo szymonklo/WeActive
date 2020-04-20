@@ -23,5 +23,8 @@ namespace WeActive.API.Data
         Task<PagedList<Activity>> GetActivities(ActivityParams activityParams);
         Task<IEnumerable<Participant>> GetParticipants(int activityId);
         Task<Participant> GetParticipant(int activityId, int userId);
+        Task<Comment> GetComment(int id);
+        Task<IEnumerable<Comment>> GetComments(int activityId);
+
     }
 }
