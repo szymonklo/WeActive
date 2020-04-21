@@ -1,18 +1,77 @@
 <div class="container mt-5">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <h1>Find your match</h1>
-    <p class="lead">Come on in to view your matches... All you need to do is sign up!</p>
+  <div *ngIf="!registerMode" style="text-align: center;">
+    <h1>Be Active</h1>
+    <p class="lead">Come on in to join us... All you need to do is sign up!</p>
+    <div *ngIf="learnMoreMode" style="text-align: center;">
+      <p class="lead text-left">This initiative helps people be active.</p>
+      <p class="lead text-left">
+        You can join others to run, ride, trek or do any kind of physical
+        activity together...
+      </p>
+
+      <p class="lead text-left">
+        If You would like to practise, but don't like to do that on your own,
+        and feel that gym exercises are also not for You, just try it...
+      </p>
+
+      <p class="lead text-left">
+        It is free, what not only means that You do not pay anything, but it
+        means that You are free to choose any activity anytime You want.
+      </p>
+      <p class="lead text-left">
+        Don't have fixed workig hours? Have shift work? Like to change
+        activities often?
+      </p>
+
+      <p class="lead text-left">Look for the activity that suits You the best.</p>
+
+      <p class="lead text-left">And if You want, You can host your own activity.</p>
+
+      <p class="lead text-left">Good luck!</p>
+    </div>
     <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
-      <button class="btn btn-info btn-lg">Learn more</button>
+      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">
+        Register
+      </button>
+      <button
+        *ngIf="!learnMoreMode"
+        class="btn btn-info btn-lg"
+        (click)="learnMore()"
+      >
+        Learn more
+      </button>
     </div>
   </div>
 
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
-        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+        <app-register
+          (cancelRegister)="cancelRegisterMode($event)"
+        ></app-register>
       </div>
     </div>
   </div>
+
+  <!-- <div *ngIf="learnMoreMode" style="text-align: center">
+    <h1>Be Active</h1>
+    <p class="lead">This initiative helps people be active.
+      You can join others to run, ride, trek or do any kind of physical activity together...
+      
+      If You would like to practise, but don't like to do that on your own, and feel that gym exercises are also not for You, just try it...
+
+      It is free, what not only means that You do not pay anything, but it means that You are free to choose any activity anytime You want.
+      Don't have fixed workig hours? Have shift work? Like to change activities often?
+
+      Look for the activity that suits You the best.
+
+      And if You want, You can host your own activity.
+
+      Good luck!
+    </p>
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
+      <button class="btn btn-info btn-lg">Learn more</button>
+    </div>
+  </div> -->
 </div>

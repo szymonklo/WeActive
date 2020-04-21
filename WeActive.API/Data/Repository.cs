@@ -229,7 +229,7 @@ namespace WeActive.API.Data
             var comments = await _context.Comments
                 .Include(c => c.Sender).ThenInclude(s => s.Photos)
                 .Include(c => c.Replies).ThenInclude(r => r.Sender).ThenInclude(s => s.Photos)
-                .Where(c => c.ActivityId == activityId)
+                .Where(c => c.ActivityId == activityId && c.ParentId == null)
                 .OrderByDescending(m => m.TimeSent)
                 .ToListAsync();
 

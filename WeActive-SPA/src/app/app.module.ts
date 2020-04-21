@@ -45,6 +45,7 @@ import { ActivityEditResolver } from './_resolvers/activity-edit.resolver';
 import { ParticipantListComponent } from './participants/participant-list/participant-list.component';
 import { ParticipantCardComponent } from './participants/participant-card/participant-card.component';
 import { MemberMiniatureComponent } from './members/member-miniature/member-miniature.component';
+import { ActivityCommentsComponent } from './activities/activity-comments/activity-comments.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -77,7 +78,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       ActivityCardComponent,
       ParticipantListComponent,
       ParticipantCardComponent,
-      MemberMiniatureComponent
+      MemberMiniatureComponent,
+      ActivityCommentsComponent
    ],
    imports: [
       BrowserModule,

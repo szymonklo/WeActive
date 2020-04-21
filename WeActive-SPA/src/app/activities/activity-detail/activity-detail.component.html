@@ -70,13 +70,13 @@
               </div>
               <strong>Participants list:</strong>
               <div>
-                <app-participant-list  [activityId]="activity.id"></app-participant-list>
+                <app-participant-list [activityId]="activity.id"></app-participant-list>
               </div>
             </div>
           </tab>
           <tab heading="Conversation">
             <div>
-              TODO - conversations
+              <app-activity-comments [activityId]="activity.id"></app-activity-comments>>
             </div>
           </tab>
         </tabset>

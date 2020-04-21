@@ -42,7 +42,7 @@ namespace WeActive.API.Controllers
         }
 
         
-        [HttpGet("activity/{activityId}", Name = "GetComments")]
+        [HttpGet("activities/{activityId}", Name = "GetComments")]
         public async Task<IActionResult> GetComments(int activityId)
         {
             // if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -55,8 +55,8 @@ namespace WeActive.API.Controllers
             return Ok(commentsFromRepo);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateComment(int userId, Comment comment)
+        [HttpPost("{userId}", Name = "PostComment")]
+        public async Task<IActionResult> PostComment(int userId, Comment comment)
         {
 
             var sender = await _repo.GetUser(userId);
@@ -65,6 +65,7 @@ namespace WeActive.API.Controllers
                 return Unauthorized();
 
             comment.SenderId = userId;
+            comment.TimeSent = DateTime.Now;
 
             var activity = await _repo.GetActivity(comment.ActivityId);
 

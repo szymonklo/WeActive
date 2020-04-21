@@ -1,3 +1,92 @@
-<p>
-  activity-comments works!
-</p>
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="comments?.length === 0">
+      <p>No comments yet... add first one using the message box below</p>
+    </div>
+
+    <ul class="chat">
+      <li *ngFor="let comment of comments">
+        <!-- to them -->
+        <!-- <div *ngIf="message.senderId == recipientId">
+          <span class="chat-img float-right">
+            <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="rounded-circle">
+          </span>
+          <div class="chat-body">
+            <div class="header">
+              <strong class="primary-font">{{message.senderKnownAs}}</strong>
+              <small class="text-muted float-right">
+                <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+              </small>
+            </div>
+            <p>{{message.content}}</p>
+          </div>
+        </div> -->
+
+        <!-- others -->
+        <!-- <div *ngIf="comment.senderId != currentUserId"> -->
+          <div> <!-- test only -->
+            <span class="chat-img float-left">
+              <img src="{{comment.sender.photoUrl}}" alt="{{comment.sender.username}}" class="rounded-circle">
+            </span>
+            <div class="chat-body">
+              <div class="header">
+                <strong class="primary-font  float-left">{{comment.sender.username | titlecase}}</strong>
+                <small class="text-muted float-right">
+                  <span class="fa fa-clock-o">{{comment.timeSent | timeago}}</span>
+                </small>
+              </div>
+              <br>
+              <p>{{comment.content}}<br>
+              
+                <button class="btn btn-secondary" (click)="toReply(comment)" *ngIf="!comment.toReply">Reply</button></p>
+                <form #replyForm="ngForm" (ngSubmit)="commentForm.valid && postComment(comment)">
+                  <div class="input-group" *ngIf="comment.toReply">
+                    <input type="text"
+                    [(ngModel)]="newComment.content"
+                    name="content"
+                    required
+                    class="form-control input-sm" placeholder="post a reply">
+                    <div class="imput-group-append">
+                      <button class="btn btn-primary" [disabled]="!replyForm.valid">Reply</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            
+            <!-- Replies -->
+            <li *ngFor="let reply of comment.replies" class="ml-5">
+              <span class="chat-img float-left">
+                <img src="{{reply.sender.photoUrl}}" alt="{{reply.sender.username}}" class="rounded-circle">
+              </span>
+              <div class="chat-body">
+                <div class="header">
+                  <strong class="primary-font  float-left">{{reply.sender.username | titlecase}}</strong>
+                  <small class="text-muted float-right">
+                    <span class="fa fa-clock-o">{{reply.timeSent | timeago}}</span>
+                  </small>
+                </div>
+                <br>
+                <p>{{reply.content}}</p>
+              </div>
+            </li>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="card-footer">
+    <form #commentForm="ngForm" (ngSubmit)="commentForm.valid && postComment()">
+      <div class="input-group">
+        <input type="text"
+        [(ngModel)]="newComment.content"
+        name="content"
+        required
+        class="form-control input-sm" placeholder="post a comment">
+        <div class="imput-group-append">
+          <button class="btn btn-primary" [disabled]="!commentForm.valid">Post</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -57,4 +57,14 @@ export class ActivityService {
   addParticipant(activityId: number, userId: number, participant: Participant) {
     return this.http.post(this.baseUrl + 'activities/' + activityId + '/participants/' + userId, participant);
   }
+
+  getComments(activityId: number) {
+    return this.http.get<Comment[]>(this.baseUrl + 'comments/activities/' + activityId);
+  }
+
+  postComment(userId: number, comment: Comment) {
+    console.log(userId);
+    console.log(comment);
+    return this.http.post(this.baseUrl + 'comments/' + userId, comment);
+  }
 }

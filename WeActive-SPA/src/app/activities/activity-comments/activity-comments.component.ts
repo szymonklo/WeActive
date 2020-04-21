@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Comment } from 'src/app/_models/comment';
+import { UserService } from 'src/app/_services/user.service';
+import { AuthService } from 'src/app/_services/auth.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+import { tap } from 'rxjs/operators';
+import { ActivityService } from 'src/app/_services/activity.service';
 
 @Component({
   selector: 'app-activity-comments',
@@ -6,10 +12,69 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./activity-comments.component.css']
 })
 export class ActivityCommentsComponent implements OnInit {
+  @Input() activityId: number;
+  // comments: Comment[];
+  comments: any;
+  newComment: any = {};
+  userId: number;
 
-  constructor() { }
+  constructor(private userService: UserService, private authService: AuthService,
+              private activityService: ActivityService, private alertify: AlertifyService) { }
 
   ngOnInit() {
+    this.userId = +this.authService.decodedToken.nameid;  // + to convert to number
+    this.loadComments();
+    console.log(this.comments);
+    console.log(this.newComment);
+    this.newComment.content = '';
+    console.log(this.newComment);
+    console.log(this.newComment.length);
+
+  }
+
+  loadComments() {
+    this.activityService.getComments(this.activityId)
+      // .pipe(
+      //   tap(comments => {
+      //     for (let i = 0; i < comments.length; i++) {
+      //       if (messages[i].isRead === false && messages[i].recipientId === this.currentUserId) {
+      //         this.userService.markAsRead(this.currentUserId, messages[i].id);
+      //       }
+      //     }
+      //   })
+      // )
+      .subscribe((comments) => {
+        this.comments = comments;
+      }, error => {
+        this.alertify.error(error);
+      });
+    console.log(this.comments);
+  }
+
+  postComment(parentComment?) {
+    this.newComment.activityId = this.activityId;
+    this.newComment.parentId = parentComment?.id;
+    this.activityService.postComment(this.userId, this.newComment)
+      .subscribe((comment: Comment) => {
+        // debugger;
+        if (parentComment === undefined) {
+          this.comments.unshift(comment);
+        } else {
+          if (parentComment.replies) {
+            parentComment.replies.unshift(comment);
+          } else {
+            parentComment.replies = comment;
+          }
+          parentComment.toReply = false;
+        }
+        this.newComment.content = '';
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  toReply(comment) {
+    comment.toReply = true;
   }
 
 }
