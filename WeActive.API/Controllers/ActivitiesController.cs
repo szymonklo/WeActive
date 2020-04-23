@@ -62,6 +62,18 @@ namespace WeActive.API.Controllers
                 return Ok(activities);
         }
 
+        // [HttpGet("{id}/number", Name = "GetParticipantsNumber")]
+        // public async Task<IActionResult> GetParticipantsNumber(int activityId)
+        // {
+        //     Console.WriteLine(123);
+        //     var participantsNumber = await _repo.GetParticipantsNumber(activityId);
+
+        //     // if (participantsFromRepo == null)
+        //     //     return NotFound();
+
+        //     return Ok(participantsNumber);
+        // }
+
         [HttpPost]
         // public async Task<IActionResult> CreateActivity(int userId, ActivityForCreationDto activityForCreationDto)
         public async Task<IActionResult> CreateActivity(Activity activity)

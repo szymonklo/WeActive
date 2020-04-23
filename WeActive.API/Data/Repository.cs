@@ -239,5 +239,13 @@ namespace WeActive.API.Data
 
             return comments;
         }
+
+        public async Task<int> GetParticipantsNumber(int activityId)
+        {
+            var participantsNumber = await _context.Participants
+                .Where(p => p.ActivityId == activityId).CountAsync();
+
+            return participantsNumber;
+        }
     }
 }

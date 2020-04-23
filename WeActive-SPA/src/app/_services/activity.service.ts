@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import {Activity } from '../_models/activity';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
-import { Message } from '../_models/message';
 import { Participant } from '../_models/participant';
 
 @Injectable({
@@ -13,6 +12,8 @@ import { Participant } from '../_models/participant';
 })
 export class ActivityService {
   baseUrl = environment.apiUrl;
+  participantsNumber = new BehaviorSubject<number>(0);
+  currentParticipantsNumber = this.participantsNumber.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +40,9 @@ export class ActivityService {
   }
 
   getActivity(id: number): Observable<Activity> {
+    this.getParticipantsNumber(id);
+    console.log('currentParticipantNumber');
+    console.log(this.currentParticipantsNumber);
     return this.http.get<Activity>(this.baseUrl + 'activities/' + id);
   }
 
@@ -54,9 +58,28 @@ export class ActivityService {
     return this.http.get(this.baseUrl + 'activities/' + activityId + '/participants');
   }
 
-  addParticipant(activityId: number, userId: number, participant: Participant) {
-    return this.http.post(this.baseUrl + 'activities/' + activityId + '/participants/' + userId, participant);
+  getParticipantsNumber(activityId: number) {
+    return this.http.get<number>(this.baseUrl + 'activities/' + activityId + '/participants/number', { observe: 'response' })
+    .pipe (
+      map((response) => {
+        console.log(response);
+        this.participantsNumber.next(response.body);
+      })
+      ).subscribe();
   }
+
+  addParticipant(activityId: number, userId: number, participant: Participant) {
+    return this.http.post(this.baseUrl + 'activities/' + activityId + '/participants/' + userId, participant)
+    .pipe(
+      map((response: any) => {
+        const participant = response;
+        if (participant) {
+          this.getParticipantsNumber(activityId);
+            }
+          })
+          );
+        }
+
 
   getComments(activityId: number) {
     return this.http.get<Comment[]>(this.baseUrl + 'comments/activities/' + activityId);

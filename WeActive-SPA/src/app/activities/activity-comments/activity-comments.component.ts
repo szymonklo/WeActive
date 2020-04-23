@@ -24,11 +24,7 @@ export class ActivityCommentsComponent implements OnInit {
   ngOnInit() {
     this.userId = +this.authService.decodedToken.nameid;  // + to convert to number
     this.loadComments();
-    console.log(this.comments);
-    console.log(this.newComment);
     this.newComment.content = '';
-    console.log(this.newComment);
-    console.log(this.newComment.length);
 
   }
 
@@ -48,7 +44,6 @@ export class ActivityCommentsComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
-    console.log(this.comments);
   }
 
   postComment(parentComment?) {

@@ -20,6 +20,7 @@ export class ActivityDetailComponent implements OnInit {
   activityStatus: string;
   activityType: string;
   userId: number;
+  participantsNumber: number;
 
   // @HostListener('window:beforeunload', ['$event'])
   // unloadNotification($event: any) {
@@ -40,7 +41,7 @@ export class ActivityDetailComponent implements OnInit {
       this.activityId = this.activity?.id;
       this.activityStatus = Status[this.activity.status];
       this.activityType = ActivityType[this.activity.activityType];
-
+      this.activityService.currentParticipantsNumber.subscribe(participantsNumber => this.participantsNumber = participantsNumber);
     }
     console.log(this.activity);
   }
