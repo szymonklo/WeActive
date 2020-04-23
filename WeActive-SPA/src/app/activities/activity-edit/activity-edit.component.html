@@ -76,19 +76,19 @@
                   </label>
                   <label class="activityType">
                     <div class="icon"><i class="material-icons md-36">directions_run</i></div>
-                    <input class="mr-3" type="radio" value="Trekking" formControlName="activityType">Running
+                    <input class="mr-3" type="radio" value="Running" formControlName="activityType">Running
                   </label>
                   <label class="activityType">
                     <div class="icon"><i class="material-icons md-36">directions_walk</i>
                     <i class="material-icons md-36">terrain</i></div>
-                    <input class="mr-3" type="radio" value="Running" formControlName="activityType">Trekking
+                    <input class="mr-3" type="radio" value="Trekking" formControlName="activityType">Trekking
                   </label>
                 </div>
               </div>
               <div>
                 <h4>Description</h4>
                 <!-- TOTO - Implement description -->
-                <textarea name="introduction" rows="6" class="form-control"></textarea>
+                <textarea name="description" rows="6" class="form-control" formControlName="description"></textarea>
               </div>
             </tab>
             <tab heading="Participants">

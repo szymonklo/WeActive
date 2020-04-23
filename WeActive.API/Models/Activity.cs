@@ -36,6 +36,8 @@ namespace WeActive.API.Models
         {
             DateCreated = DateTime.Now;
         }
+
+        public string Description { get; set;}
     }
     
 

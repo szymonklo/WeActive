@@ -1,10 +1,4 @@
 
-<div class="text-center mt-3">
-  <h2>Your matches - {{pagination.totalItems}} found</h2>
-</div>
-
-
-
 <div>
   <div class="container mt-3">
 
@@ -37,6 +31,7 @@
       <!-- Sorting -->
       <div class="col">
         <div class="btn-group float-right">
+        <label for="minAge" class="mr-2">Order by: </label>
           <button type="button" name="orderBy" class="btn btn-primary" 
           [(ngModel)]="userParams.orderBy" (click)="loadUsers()" btnRadio="lastActive">Last Active</button>
           <button type="button" name="orderBy" class="btn btn-primary"

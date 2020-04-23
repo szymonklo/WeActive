@@ -33,6 +33,8 @@ export interface Activity {
 
     activityType: ActivityType;
 
+    description: string;
+
 }
 
 export enum ActivityType {

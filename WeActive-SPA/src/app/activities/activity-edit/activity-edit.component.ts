@@ -110,6 +110,8 @@ export class ActivityEditComponent implements OnInit {
 
       activityType: [''], // check why patchValue not working, check why unable to create undefined
 
+      description: [''],
+
       minParticipantsNumber: ['', Validators.required],
       maxParticipantsNumber: ['', Validators.required],
 

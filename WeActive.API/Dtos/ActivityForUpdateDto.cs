@@ -31,6 +31,7 @@ namespace WeActive.API.Models
         public Status Status { get; set; }
 
         public ActivityType ActivityType { get; set; }
+        public string Description { get; set; }
 
     }
 }

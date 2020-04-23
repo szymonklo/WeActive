@@ -42,6 +42,7 @@ export class ActivityDetailComponent implements OnInit {
       this.activityType = ActivityType[this.activity.activityType];
 
     }
+    console.log(this.activity);
   }
 
   canEdit() {

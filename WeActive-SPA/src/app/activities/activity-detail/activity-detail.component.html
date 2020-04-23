@@ -30,6 +30,9 @@
           <div>
             <strong>Status: </strong>{{activityStatus}}
           </div>
+          <div>
+            <strong>Activity Type: </strong>{{activityType}}
+          </div>
         </div>
         <!-- Div for host to manage -->
         <div *ngIf="canEdit()" class="card-footer">
@@ -45,28 +48,36 @@
       <div class="tab-panel">
         <tabset class="member-tabset activity-tabset">
           <tab heading="Description">
-            <div>
             <!-- Activity Type -->
             <!-- TODO - implement icon -->
-            {{activityType}}
+            <!-- {{activityType}} -->
+
+            <div *ngIf="activity.description?.length == null">
+              <p>Host has not added additional description. If You have any question use comments tab</p>
             </div>
-            <div>
-              <h4>Description</h4>
-              <!-- TODO - implement description -->
+            <div *ngIf="activity.description?.length > 0">
+              <p>{{activity.description}}</p>
             </div>
           </tab>
           <tab heading="Participants">
             <div>
-              <strong>Participants number:</strong>
-              <!-- Participants -->
-              <div>
+              <div class="row">
+                <div class="host-img col-5">
+                  <strong>Host: </strong>
+                  <app-member-miniature [userId]="activity.hostId"></app-member-miniature>
+                </div>
+                <div class="text-center">
+                  <p><strong>Participants number:</strong></p>
+                  <br>
+                  <!-- Participants -->
+                  
 
-                Now: {{activity.participantsNumber || 0}} <i class="material-icons md-36">people</i>
+                    Now: {{activity.participantsNumber || 0}} <i class="material-icons md-36">people</i>
+                  <br>
+                    (min: {{activity.minParticipantsNumber}}
 
-                (Min: {{activity.minParticipantsNumber}}
-
-                Max: {{activity.maxParticipantsNumber}})
-
+                    max: {{activity.maxParticipantsNumber}})
+                </div>
               </div>
               <strong>Participants list:</strong>
               <div>
@@ -74,7 +85,7 @@
               </div>
             </div>
           </tab>
-          <tab heading="Conversation">
+          <tab heading="Comments">
             <div>
               <app-activity-comments [activityId]="activity.id"></app-activity-comments>>
             </div>
